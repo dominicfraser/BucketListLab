@@ -5,7 +5,7 @@ var DbQueryHelper = function(){
 };
 
 
-dbQueryHelper.prototype = {
+DbQueryHelper.prototype = {
   add: function(countryToAdd, onQueryFinishedCallback){
     MongoClient.connect(this.url, function(err, db){
       if (db){
@@ -24,10 +24,11 @@ dbQueryHelper.prototype = {
         var collection = db.collection('countries');
         collection.find().toArray(function(err, docs){
           onQueryFinishedCallback(docs);
+        })
       }
     })
   }
-
 }
+
 
 module.exports = DbQueryHelper;
