@@ -31,6 +31,17 @@ CountriesContainer.prototype = {
       console.log(countries)
       callback(countries);
     }.bind(this));
+  },
+  specificRest: function(countryName, callback){
+    console.log(countryName)
+    var url = "https://restcountries.eu/rest/v2/name/" + countryName;
+    this.requestHelper.makeGetRequest(url, function (results) {
+      console.log(results)
+      var country = this.populateCountries(results)[0]
+      console.log(country)
+      callback(country);
+    }.bind(this));
+
   }
 };
 

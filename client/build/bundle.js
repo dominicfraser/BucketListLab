@@ -81,6 +81,8 @@ var UI = function() {
   countries.allRest(function (countries) {
     this.renderRest(countries);
   }.bind(this));
+
+  this.createForm();
 }    
 
 UI.prototype = {
@@ -112,13 +114,48 @@ UI.prototype = {
     container.innerHTML = '';
 
     for (var country of countries) {
-      var li = document.createElement('li');
-      this.appendText(li, country.name, 'Name: ');
-      this.appendText(li, country.population, 'Population: ');
+      var option = document.createElement('option');
+      this.appendText(option, country.name, '');
       
-      container.appendChild(li);
+      container.appendChild(option);
     }
   },
+  createForm: function(){
+    //create the form and a div
+    var div = document.createElement('div');
+    var form = document.createElement('form');
+    var body = document.querySelector('body');
+
+    //append a button to submit the form
+    var button = document.createElement('button');
+    button.type = 'submit';
+    button.innerText = 'Add';
+    form.appendChild(button);
+
+    //add event handler to the onSubmit event of the form
+    form.onsubmit = function(e){
+      var selected = document.getElementById('countries-rest').value;
+
+      e.preventDefault();
+      var countries = new CountriesContainer(); 
+
+      countries.specificRest(selected, function(result){
+console.log(selected)
+        var newCountry = {
+          name: result.name,
+          population: result.population,
+          capital: result.capital
+        }
+
+        countries.add(newCountry, function(data){
+          this.renderBucket(data);
+        }.bind(this));
+      }.bind(this))
+    }.bind(this)
+
+    div.appendChild(form);
+    body.insertBefore( div, body.firstChild );
+  }
   
 }
 
@@ -229,6 +266,17 @@ CountriesContainer.prototype = {
       console.log(countries)
       callback(countries);
     }.bind(this));
+  },
+  specificRest: function(countryName, callback){
+    console.log(countryName)
+    var url = "https://restcountries.eu/rest/v2/name/" + countryName;
+    this.requestHelper.makeGetRequest(url, function (results) {
+      console.log(results)
+      var country = this.populateCountries(results)[0]
+      console.log(country)
+      callback(country);
+    }.bind(this));
+
   }
 };
 
