@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 
-var dbQueryHelper = function(){
+var DbQueryHelper = function(){
   this.url = "mongodb://localhost:27017/world_countries"
 };
 
@@ -30,4 +30,4 @@ dbQueryHelper.prototype = {
 
 }
 
-module.exports = dbQueryHelper;
+module.exports = DbQueryHelper;
