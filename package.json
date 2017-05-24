@@ -1,0 +1,20 @@
+{
+  "name": "bucketlistlab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "seeds.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dominicfraser/BucketListLab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dominicfraser/BucketListLab/issues"
+  },
+  "homepage": "https://github.com/dominicfraser/BucketListLab#readme"
+}
