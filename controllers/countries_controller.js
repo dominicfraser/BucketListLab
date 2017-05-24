@@ -4,6 +4,7 @@ var countryRouter = express.Router();
 var DbQueryHelper = require('../db/dbQueryHelper.js')
 var query = new DbQueryHelper();
 
+
 //country index
 countryRouter.get('/', function(req, res){
   query.all(function(countries){

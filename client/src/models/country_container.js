@@ -23,6 +23,14 @@ CountriesContainer.prototype = {
   add: function (newCountry, callback) {
     var countryData = JSON.stringify(newCountry);
     this.requestHelper.makePostRequest('http://localhost:3000/api/countries', callback, countryData);
+  },
+  allRest: function (callback) {
+    this.requestHelper.makeGetRequest('https://restcountries.eu/rest/v2/all', function (results) {
+      console.log(results)
+      var countries = this.populateCountries(results)
+      console.log(countries)
+      callback(countries);
+    }.bind(this));
   }
 };
 
